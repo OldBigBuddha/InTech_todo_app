@@ -35,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ListView list = (ListView)parent;
-                String selectedItem = (String) list.getItemAtPosition(position);
-                Log.d("DEBUG","selected" + selectedItem);
+                ToDoDB selectedItem = (ToDoDB) list.getItemAtPosition(position);
+                selectedItem.delete();
+                setToDoList();
 
             }
         });
@@ -63,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         mDB.save();
         mDB = new ToDoDB();
         setToDoList();
-
 
     }
 
