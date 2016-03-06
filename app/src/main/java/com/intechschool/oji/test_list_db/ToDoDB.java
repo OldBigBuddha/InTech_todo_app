@@ -13,6 +13,9 @@ public class ToDoDB extends Model {
     @Column(name = "todo")
     public String todo;
 
+    @Column(name = "priority")
+    public int priority;
+
     @Override
     public String toString() {
         return todo;
@@ -21,6 +24,8 @@ public class ToDoDB extends Model {
     public ToDoDB() {
         super();
     }
+
+
 
     public ToDoDB(String name) {
         super();

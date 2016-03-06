@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:textColor="#000">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:textColor="#000"
+    android:background="#ff7409">
 
-</TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/todo"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:padding="16dp" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:text="値"
+        android:id="@+id/priority"
+        android:layout_gravity="right"
+        android:textSize="15dp"
+        android:padding="16dp"
+        android:textColor="#fff" />
+</LinearLayout>
