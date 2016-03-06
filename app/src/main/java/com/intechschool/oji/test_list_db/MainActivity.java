@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
+import android.support.v4.widget.ExploreByTouchHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,34 +21,83 @@ import android.widget.ListView;
 
 import com.activeandroid.query.Select;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import de.timroes.android.listview.EnhancedListView;
 
 public class MainActivity extends Activity {
 
-    ListView listView;
+    EnhancedListView listView;
     EditText createToDo;
     Button btAdd;
     ToDoDB mDB;
+    ToDoDB selectedItem;
+    boolean is_Edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (EnhancedListView) findViewById(R.id.listView);
         createToDo = (EditText) findViewById(R.id.editToDo);
         btAdd = (Button) findViewById(R.id.btCreate);
 
+        is_Edit = false;
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(final AdapterView<?> PARENT, View view, final int POSITION, long id) {
+                final CharSequence[] ITEMS = {"編集"};
+                AlertDialog.Builder listDig = new AlertDialog.Builder(MainActivity.this);
+                listDig.setTitle("メニュー");
+                listDig.setItems(
+                        ITEMS,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ListView list = (ListView) PARENT;
+                                selectedItem = (ToDoDB) list.getItemAtPosition(POSITION);
+                                createToDo.setText(selectedItem.todo);
+                                is_Edit = true;
+                                setToDoList();
+                            }
+                        }
+                );
+
+                listDig.create().show();
+
+
+            }
+        });
+
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 ListView list = (ListView) parent;
-                ToDoDB selectedItem = (ToDoDB) list.getItemAtPosition(position);
+                selectedItem = (ToDoDB) list.getItemAtPosition(position);
                 selectedItem.delete();
                 setToDoList();
 
+
+                return false;
             }
+        });
+
+        listView.setDismissCallback(new de.timroes.android.listview.EnhancedListView.OnDismissCallback() {
+            @Override
+            public EnhancedListView.Undoable onDismiss(final EnhancedListView listview, final int POSITIN) {
+                selectedItem = (ToDoDB) listview.getItemAtPosition(POSITIN);
+                selectedItem.delete();
+
+                return  null;
+                }
+
         });
 
         mDB = new ToDoDB();
@@ -74,12 +124,22 @@ public class MainActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        saveToDo(which);
+
+                        if (is_Edit) {
+                            selectedItem.todo = createToDo.getText().toString();
+                            selectedItem.priority = which;
+                            selectedItem.save();
+                            is_Edit = false;
+
+                        } else {
+                            saveToDo(which);
+                        }
                         createToDo.setText("");
+                        setToDoList();
+
                     }
                 }
         );
-
         listDig.create().show();
 
     }
@@ -88,6 +148,9 @@ public class MainActivity extends Activity {
         ToDoDB saveDB = new ToDoDB();
         saveDB.todo = createToDo.getText().toString();
         saveDB.priority = priority;
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.JAPANESE);
+        saveDB.date = sdf.format(date);
         saveDB.save();
         setToDoList();
 
@@ -99,8 +162,7 @@ public class MainActivity extends Activity {
             List<ToDoDB> todoList = new Select().from(ToDoDB.class).where("priority = ?",i).execute();
             display_list.addAll(todoList);
         }
-//        List<ToDoDB> todoList = new Select().from(ToDoDB.class).where("priority = ?",0).execute();
-//       display_list.addAll(todoList);
+
         ToDoListAdapter adapter = new ToDoListAdapter(
                 getApplicationContext(),
                 R.layout.todo_row,

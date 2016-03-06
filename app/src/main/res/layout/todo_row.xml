@@ -7,16 +7,32 @@
     android:textColor="#000"
     android:background="#ff7409">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/todo"
-        android:layout_gravity="left"
-        android:layout_weight="1"
-        android:textSize="20dp"
-        android:textColor="#fff"
-        android:padding="16dp" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/todo"
+            android:layout_gravity="left"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:padding="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/date"
+            android:layout_weight="1"
+            android:textSize="12dp"
+            android:textColor="#fff"
+            android:gravity="right" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="50dp"
@@ -26,5 +42,6 @@
         android:layout_gravity="right"
         android:textSize="15dp"
         android:padding="16dp"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:gravity="center" />
 </LinearLayout>

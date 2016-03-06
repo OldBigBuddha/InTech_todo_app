@@ -32,11 +32,13 @@ public class ToDoListAdapter extends ArrayAdapter {
         ToDoDB item = (ToDoDB)getItem(position);
         TextView element_todo = (TextView) convertView.findViewById(R.id.todo);
         TextView element_priority = (TextView)convertView.findViewById(R.id.priority);
+        TextView element_date = (TextView)convertView.findViewById(R.id.date);
 
 
         element_todo.setText(item.todo);
         element_priority.setText(priority[item.priority]+"");
         element_priority.setBackgroundColor(Color.parseColor(colorCode[item.priority]));
+        element_date.setText(item.date);
 
 
 

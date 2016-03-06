@@ -16,6 +16,9 @@ public class ToDoDB extends Model {
     @Column(name = "priority")
     public int priority;
 
+    @Column(name = "date")
+    public String date;
+
     @Override
     public String toString() {
         return todo;
