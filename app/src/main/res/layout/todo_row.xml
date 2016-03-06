@@ -31,7 +31,8 @@
             android:layout_weight="1"
             android:textSize="12dp"
             android:textColor="#fff"
-            android:gravity="right" />
+            android:gravity="right"
+            android:paddingRight="8dp" />
     </LinearLayout>
 
     <TextView

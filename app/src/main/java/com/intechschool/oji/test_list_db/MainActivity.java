@@ -94,11 +94,13 @@ public class MainActivity extends Activity {
             public EnhancedListView.Undoable onDismiss(final EnhancedListView listview, final int POSITIN) {
                 selectedItem = (ToDoDB) listview.getItemAtPosition(POSITIN);
                 selectedItem.delete();
+                setToDoList();
 
                 return  null;
                 }
 
         });
+        listView.enableSwipeToDismiss();
 
         mDB = new ToDoDB();
 
