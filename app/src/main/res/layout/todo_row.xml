@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:textColor="#000"
-    android:background="#ff7409">
+    android:background="#cdd1f6">
 
     <LinearLayout
         android:orientation="vertical"
@@ -20,7 +20,7 @@
             android:id="@+id/todo"
             android:layout_gravity="left"
             android:textSize="20dp"
-            android:textColor="#fff"
+            android:textColor="#646464"
             android:padding="16dp" />
 
         <TextView
@@ -30,9 +30,10 @@
             android:id="@+id/date"
             android:layout_weight="1"
             android:textSize="12dp"
-            android:textColor="#fff"
+            android:textColor="#9f9612"
             android:gravity="right"
-            android:paddingRight="8dp" />
+            android:paddingRight="8dp"
+            android:background="#81adb4ff" />
     </LinearLayout>
 
     <TextView
