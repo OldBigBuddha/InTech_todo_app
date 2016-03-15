@@ -164,24 +164,15 @@ public class MainActivity extends Activity {
         saveDB.todo = save_Str;
         saveDB.priority = priority;
 
-        /* notificationManager */
-        mBuilder = new NotificationCompat.Builder(this);
-        mBuilder.setSmallIcon(R.drawable.icon);
-        mBuilder.setContentTitle(save_Str);
-        mBuilder.setContentText(save_Str + "が追加されました");
-        notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0,mBuilder.build());
-        /**/
+        Intent i = new Intent(MainActivity.this,Notifier.class);
+        PendingIntent sender = PendingIntent.getBroadcast(MainActivity.this, 0, i, 0);
 
-//        Intent i = new Intent(getApplicationContext(),MainActivity.class);
-//        PendingIntent sender = PendingIntent.getBroadcast(this, 0, i, 0);
-//
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(System.currentTimeMillis());
-//        calendar.add(Calendar.SECOND, 10);
-//
-//        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-//        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),sender);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.SECOND, 5);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),sender);
 
 
 
