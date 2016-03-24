@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 //        setNotification_small();
 //        setAlarm_small();
 
-        setmTime();
+//        setmTime();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -117,11 +117,11 @@ public class MainActivity extends AppCompatActivity {
 //                ListView list = (ListView) parent;
 //                selectedItem = (ToDoDB) list.getItemAtPosition(position);
 //                selectedItem.delete();
-//                setToDoList();
-
+//                setToDoList()
                 setTimePickerDialog();
                 setDatePickerDialog();
 
+                setAlarm_small();
                 return false;
             }
         });
@@ -231,12 +231,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.add(Calendar.SECOND, 10);
+        Calendar alarmCalendar;
+        alarmCalendar = MainActivity.this.mCaledar;
+
+        alarmCalendar.add(Calendar.YEAR, year);
+        alarmCalendar.add(Calendar.MONTH, month);
+        alarmCalendar.add(Calendar.DAY_OF_MONTH, day);
+        alarmCalendar.add(Calendar.HOUR_OF_DAY, hour);
+        alarmCalendar.add(Calendar.MINUTE, minute);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
 
         Toast.makeText(this, "Start", Toast.LENGTH_SHORT).show();
     }
@@ -252,10 +257,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void setDatePickerDialog() {
 
-//        mCaledar = Calendar.getInstance();
-//        int hour, minute;
-//        hour = mCaledar.get(Calendar.HOUR_OF_DAY);
-//        minute = mCaledar.get(Calendar.MINUTE);
 
         final DatePickerDialog datePickerDialog;
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -263,6 +264,10 @@ public class MainActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                 Log.d("DatePicker", "Year:" + year + "/Month:" + monthOfYear + "/Day:" + dayOfMonth);
+
+                MainActivity.this.year = year;
+                MainActivity.this.month = monthOfYear;
+                MainActivity.this.day = dayOfMonth;
             }
         };
 
@@ -273,13 +278,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void setTimePickerDialog() {
 
-        mCaledar =Calendar.getInstance();
-
         TimePickerDialog timePickerDialog;
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 Log.d("TimePicker", "hour:" + hourOfDay + "/minute:" + minute);
+
+                MainActivity.this.hour = hourOfDay;
+                MainActivity.this.minute = minute;
             }
         };
 

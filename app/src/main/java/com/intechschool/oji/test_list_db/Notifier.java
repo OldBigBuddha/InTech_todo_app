@@ -26,23 +26,6 @@ public class Notifier extends BroadcastReceiver {
 
     void setNotificatin(Context context) {
 
-
-//        Intent intent2 = new Intent(context, MainActivity.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent2, 0);
-//
-//        NotificationManager mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-//        Notification mNotification = new NotificationCompat.Builder(context)
-//                .setSmallIcon(0)
-//                .setTicker("TEST")
-////                .setWhen(System.currentTimeMillis())
-//                .setContentTitle("Nofication_test")
-//                .setContentText("test")
-//                .setContentIntent(pendingIntent)
-//                .build();
-//
-//        mNotificationManager.cancelAll();
-//        mNotificationManager.notify(0, mNotification);
-
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
         mBuilder.setSmallIcon(R.drawable.icon_2)
