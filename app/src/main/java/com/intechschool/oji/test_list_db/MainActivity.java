@@ -120,6 +120,13 @@ public class MainActivity extends AppCompatActivity {
 //                setToDoList()
                 setTimePickerDialog();
                 setDatePickerDialog();
+                Log.d("Date",
+                       "Yera:" + year +
+                               "/Month:" + month +
+                               "/Day" + day +
+                               "//Hour" + hour +
+                               "/Minute" + minute
+                        );
 
                 setAlarm_small();
                 return false;
@@ -234,16 +241,18 @@ public class MainActivity extends AppCompatActivity {
         Calendar alarmCalendar;
         alarmCalendar = MainActivity.this.mCaledar;
 
-        alarmCalendar.add(Calendar.YEAR, year);
-        alarmCalendar.add(Calendar.MONTH, month);
-        alarmCalendar.add(Calendar.DAY_OF_MONTH, day);
-        alarmCalendar.add(Calendar.HOUR_OF_DAY, hour);
-        alarmCalendar.add(Calendar.MINUTE, minute);
+        alarmCalendar.set(Calendar.YEAR, year);
+        alarmCalendar.set(Calendar.MONTH, month);
+        alarmCalendar.set(Calendar.DAY_OF_MONTH, day);
+        alarmCalendar.set(Calendar.HOUR_OF_DAY, hour);
+        alarmCalendar.set(Calendar.MINUTE, minute);
+
+        long calendar_long = alarmCalendar.getTimeInMillis();
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar_long, pendingIntent);
 
-        Toast.makeText(this, "Start", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Date:" + calendar_long, Toast.LENGTH_SHORT).show();
     }
 
     public void setmTime() {
@@ -263,17 +272,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-                Log.d("DatePicker", "Year:" + year + "/Month:" + monthOfYear + "/Day:" + dayOfMonth);
-
                 MainActivity.this.year = year;
                 MainActivity.this.month = monthOfYear;
                 MainActivity.this.day = dayOfMonth;
+
+                Log.d("DatePicker", "Year:" + MainActivity.this.year + "/Month:" + MainActivity.this.month + "/Day:" + MainActivity.this.day);
+
             }
         };
 
         datePickerDialog = new DatePickerDialog(this, onDateSetListener,year,month,day);
 
         datePickerDialog.show();
+
     }
 
     public void setTimePickerDialog() {
@@ -282,10 +293,12 @@ public class MainActivity extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Log.d("TimePicker", "hour:" + hourOfDay + "/minute:" + minute);
 
                 MainActivity.this.hour = hourOfDay;
                 MainActivity.this.minute = minute;
+
+                Log.d("TimePicker", "hour:" + MainActivity.this.hour + "/minute:" + MainActivity.this.minute);
+
             }
         };
 

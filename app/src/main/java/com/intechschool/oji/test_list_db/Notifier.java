@@ -30,7 +30,7 @@ public class Notifier extends BroadcastReceiver {
 
         mBuilder.setSmallIcon(R.drawable.icon_2)
                 .setContentTitle("TEST")
-                .setContentText("Test");
+                .setContentText("next");
 
         NotificationManagerCompat mManager = NotificationManagerCompat.from(context);
         mManager.notify(1, mBuilder.build());
