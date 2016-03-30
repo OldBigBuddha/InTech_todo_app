@@ -1,36 +1,27 @@
 package com.intechschool.oji.test_list_db;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteCursor;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.widget.ExploreByTouchHelper;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.text.format.Time;
 
 import com.activeandroid.query.Select;
 
@@ -119,17 +110,9 @@ public class MainActivity extends AppCompatActivity {
 //                selectedItem.delete();
 //                setToDoList()
                 setTimePickerDialog();
-                setDatePickerDialog();
-                Log.d("Date",
-                       "Yera:" + year +
-                               "/Month:" + month +
-                               "/Day" + day +
-                               "//Hour" + hour +
-                               "/Minute" + minute
-                        );
 
-                setAlarm_small();
-                return false;
+
+                return true;
             }
         });
 
@@ -277,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.day = dayOfMonth;
 
                 Log.d("DatePicker", "Year:" + MainActivity.this.year + "/Month:" + MainActivity.this.month + "/Day:" + MainActivity.this.day);
-
+                setAlarm_small();
             }
         };
 
@@ -298,6 +281,8 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.minute = minute;
 
                 Log.d("TimePicker", "hour:" + MainActivity.this.hour + "/minute:" + MainActivity.this.minute);
+
+                setDatePickerDialog();
 
             }
         };

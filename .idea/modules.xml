@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Test_List_DB.iml" filepath="$PROJECT_DIR$/Test_List_DB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InTech_todo_app.iml" filepath="$PROJECT_DIR$/InTech_todo_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
