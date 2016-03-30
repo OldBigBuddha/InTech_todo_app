@@ -26,7 +26,8 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".Notifier"
+        <receiver
+            android:name=".Notifier"
             android:process=":remote" />
 
     </application>

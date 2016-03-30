@@ -237,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
         ToDoDB sendDB = new ToDoDB();
         String sendTodo = sendDB.todo;
+        Log.d("string", sendTodo);
         Notifier notifier = new Notifier();
         notifier.sendTodo(sendTodo);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
