@@ -15,6 +15,8 @@ import android.widget.Toast;
  */
 public class Notifier extends BroadcastReceiver {
 
+    String todo;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -29,12 +31,16 @@ public class Notifier extends BroadcastReceiver {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
         mBuilder.setSmallIcon(R.drawable.icon_2)
-                .setContentTitle("TEST")
-                .setContentText("next");
+                .setContentTitle(todo)
+                .setContentText(todo + "の時間です");
 
         NotificationManagerCompat mManager = NotificationManagerCompat.from(context);
         mManager.notify(1, mBuilder.build());
 
+    }
+
+    public void sendTodo (String sendTodo) {
+        Notifier.this.todo = sendTodo;
     }
 
 }

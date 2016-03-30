@@ -235,6 +235,10 @@ public class MainActivity extends AppCompatActivity {
 
     void setAlarm_small() {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
+        ToDoDB sendDB = new ToDoDB();
+        String sendTodo = sendDB.todo;
+        Notifier notifier = new Notifier();
+        notifier.sendTodo(sendTodo);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
 
         Calendar alarmCalendar;
@@ -245,13 +249,14 @@ public class MainActivity extends AppCompatActivity {
         alarmCalendar.set(Calendar.DAY_OF_MONTH, day);
         alarmCalendar.set(Calendar.HOUR_OF_DAY, hour);
         alarmCalendar.set(Calendar.MINUTE, minute);
+        alarmCalendar.set(Calendar.SECOND, 0);
 
         long calendar_long = alarmCalendar.getTimeInMillis();
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar_long, pendingIntent);
 
-        Toast.makeText(this, "Date:" + calendar_long, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Date:" + calendar_long, Toast.LENGTH_SHORT).show();
     }
 
     public void setmTime() {
@@ -275,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.month = monthOfYear;
                 MainActivity.this.day = dayOfMonth;
 
-                Log.d("DatePicker", "Year:" + MainActivity.this.year + "/Month:" + MainActivity.this.month + "/Day:" + MainActivity.this.day);
+//                Log.d("DatePicker", "Year:" + MainActivity.this.year + "/Month:" + MainActivity.this.month + "/Day:" + MainActivity.this.day);
                 setAlarm_small();
             }
         };
@@ -296,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.hour = hourOfDay;
                 MainActivity.this.minute = minute;
 
-                Log.d("TimePicker", "hour:" + MainActivity.this.hour + "/minute:" + MainActivity.this.minute);
+//                Log.d("TimePicker", "hour:" + MainActivity.this.hour + "/minute:" + MainActivity.this.minute);
 
                 setDatePickerDialog();
             }
