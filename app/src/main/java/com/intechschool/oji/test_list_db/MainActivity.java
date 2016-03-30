@@ -119,17 +119,16 @@ public class MainActivity extends AppCompatActivity {
 //                selectedItem.delete();
 //                setToDoList()
                 setTimePickerDialog();
-                setDatePickerDialog();
-                Log.d("Date",
-                       "Yera:" + year +
-                               "/Month:" + month +
-                               "/Day" + day +
-                               "//Hour" + hour +
-                               "/Minute" + minute
-                        );
+                // Log.d("Date",
+                //        "Yera:" + year +
+                //                "/Month:" + month +
+                //                "/Day" + day +
+                //                "//Hour" + hour +
+                //                "/Minute" + minute
+                //         );
 
-                setAlarm_small();
-                return false;
+
+                return true;
             }
         });
 
@@ -277,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.day = dayOfMonth;
 
                 Log.d("DatePicker", "Year:" + MainActivity.this.year + "/Month:" + MainActivity.this.month + "/Day:" + MainActivity.this.day);
-
+                setAlarm_small();
             }
         };
 
@@ -299,6 +298,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d("TimePicker", "hour:" + MainActivity.this.hour + "/minute:" + MainActivity.this.minute);
 
+                setDatePickerDialog();
             }
         };
 
@@ -308,4 +308,3 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
-
