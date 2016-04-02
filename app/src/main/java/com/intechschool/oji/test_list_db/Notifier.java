@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -22,7 +23,7 @@ public class Notifier extends BroadcastReceiver {
 
         setNotificatin(context);
 
-        Toast.makeText(context, "Alart", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, todo, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -30,6 +31,7 @@ public class Notifier extends BroadcastReceiver {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
+        Log.d("set-Notifier", todo);
         mBuilder.setSmallIcon(R.drawable.icon_2)
                 .setContentTitle(todo)
                 .setContentText(todo + "の時間です");
@@ -40,7 +42,9 @@ public class Notifier extends BroadcastReceiver {
     }
 
     public void sendTodo (String sendTodo) {
+
         Notifier.this.todo = sendTodo;
+        Log.d("String" ,todo);
     }
 
 }

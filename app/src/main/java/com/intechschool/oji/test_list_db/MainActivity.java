@@ -113,19 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                ListView list = (ListView) parent;
-//                selectedItem = (ToDoDB) list.getItemAtPosition(position);
-//                selectedItem.delete();
-//                setToDoList()
-                setTimePickerDialog();
-                // Log.d("Date",
-                //        "Yera:" + year +
-                //                "/Month:" + month +
-                //                "/Day" + day +
-                //                "//Hour" + hour +
-                //                "/Minute" + minute
-                //         );
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int POSITION, long id) {
+                selectedItem = (ToDoDB)listView.getItemAtPosition(POSITION);
+                setTimePickerDialog(selectedItem);
 
 
                 return true;
@@ -233,10 +223,9 @@ public class MainActivity extends AppCompatActivity {
         mManager.notify(1, mBuilder.build());
     }
 
-    void setAlarm_small() {
+    void setAlarm_small(final ToDoDB POSITION_DB) {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
-        ToDoDB sendDB = new ToDoDB();
-        String sendTodo = sendDB.todo;
+        String sendTodo = POSITION_DB.todo;
         Log.d("string", sendTodo);
         Notifier notifier = new Notifier();
         notifier.sendTodo(sendTodo);
@@ -269,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setDatePickerDialog() {
+    public void setDatePickerDialog(final ToDoDB POSITION_DB) {
 
 
         final DatePickerDialog datePickerDialog;
@@ -282,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.day = dayOfMonth;
 
 //                Log.d("DatePicker", "Year:" + MainActivity.this.year + "/Month:" + MainActivity.this.month + "/Day:" + MainActivity.this.day);
-                setAlarm_small();
+                setAlarm_small(POSITION_DB);
             }
         };
 
@@ -292,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setTimePickerDialog() {
+    public void setTimePickerDialog(final ToDoDB POSITION_DB) {
 
         TimePickerDialog timePickerDialog;
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -304,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
 
 //                Log.d("TimePicker", "hour:" + MainActivity.this.hour + "/minute:" + MainActivity.this.minute);
 
-                setDatePickerDialog();
+                setDatePickerDialog(POSITION_DB);
             }
         };
 
