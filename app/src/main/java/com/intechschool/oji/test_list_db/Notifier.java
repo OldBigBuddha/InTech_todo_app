@@ -33,8 +33,8 @@ public class Notifier extends BroadcastReceiver {
 
         Log.d("set-Notifier", todo);
         mBuilder.setSmallIcon(R.drawable.icon_2)
-                .setContentTitle(todo)
-                .setContentText(todo + "の時間です");
+                .setContentTitle(Notifier.this.todo)
+                .setContentText(Notifier.this.todo + "の時間です");
 
         NotificationManagerCompat mManager = NotificationManagerCompat.from(context);
         mManager.notify(1, mBuilder.build());
