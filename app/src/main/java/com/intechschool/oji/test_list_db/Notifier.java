@@ -17,12 +17,13 @@ import android.widget.Toast;
 public class Notifier extends BroadcastReceiver {
 
     String todo;
+    ToDoDB todo_DB;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        setNotificatin(context);
 
+        setNotificatin(context);
         Toast.makeText(context, todo, Toast.LENGTH_SHORT).show();
 
     }
@@ -31,7 +32,6 @@ public class Notifier extends BroadcastReceiver {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
-        Log.d("set-Notifier", todo);
         mBuilder.setSmallIcon(R.drawable.icon_2)
                 .setContentTitle(Notifier.this.todo)
                 .setContentText(Notifier.this.todo + "の時間です");

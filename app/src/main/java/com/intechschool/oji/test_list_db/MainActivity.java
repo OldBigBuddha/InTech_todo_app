@@ -1,35 +1,22 @@
 package com.intechschool.oji.test_list_db;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteCursor;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.widget.ExploreByTouchHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import android.text.format.Time;
 
 import com.activeandroid.query.Select;
@@ -53,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     boolean is_Edit;
     String[] color_Code;
     Time mTime;
-    int[] date;
     Calendar mCaledar;
     int year, month, day, hour, minute;
 
@@ -78,12 +64,6 @@ public class MainActivity extends AppCompatActivity {
         hour = mCaledar.get(Calendar.HOUR_OF_DAY);
         minute = mCaledar.get(Calendar.MINUTE);
 
-
-//        setNotification_small();
-//        setAlarm_small();
-
-//        setmTime();
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView<?> PARENT, View view, final int POSITION, long id) {
@@ -103,10 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                 );
-
                 listDig.create().show();
-
-
             }
         });
 
@@ -195,8 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
-    void setToDoList() {
+    public void setToDoList() {
         List<ToDoDB> display_list = new ArrayList();
         for (int i=0;i<3;i++) {
             List<ToDoDB> todoList = new Select().from(ToDoDB.class).where("priority = ?",i).execute();
@@ -212,23 +188,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
-    void setNotification_small () {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext());
-
-        mBuilder.setSmallIcon(R.drawable.icon_2)
-                .setContentTitle("TEST")
-                .setContentText("Test");
-
-        NotificationManagerCompat mManager = NotificationManagerCompat.from(getApplicationContext());
-        mManager.notify(1, mBuilder.build());
-    }
-
-    void setAlarm_small(final ToDoDB POSITION_DB) {
+    public void setAlarm_small(final ToDoDB POSITION_DB) {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
-        String sendTodo = POSITION_DB.todo;
-        Log.d("string", sendTodo);
-        Notifier notifier = new Notifier();
-        notifier.sendTodo(sendTodo);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
 
         Calendar alarmCalendar;
@@ -245,17 +206,6 @@ public class MainActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar_long, pendingIntent);
-
-//        Toast.makeText(this, "Date:" + calendar_long, Toast.LENGTH_SHORT).show();
-    }
-
-    public void setmTime() {
-        if (mTime.hour > 12) {
-            Toast.makeText(this, "AM", Toast.LENGTH_SHORT).show();
-        }else if (mTime.hour <13) {
-            Toast.makeText(this, "PM", Toast.LENGTH_SHORT).show();
-
-        }
     }
 
     public void setDatePickerDialog(final ToDoDB POSITION_DB) {
