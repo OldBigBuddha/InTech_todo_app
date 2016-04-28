@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
     public void setAlarm_small(final ToDoDB POSITION_DB) {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
+        intent.putExtra("Alart_Context", POSITION_DB.todo);
 
         Calendar alarmCalendar;
         alarmCalendar = MainActivity.this.mCaledar;

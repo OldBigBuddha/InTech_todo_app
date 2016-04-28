@@ -23,18 +23,21 @@ public class Notifier extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
 
-        setNotificatin(context);
+        setNotificatin(context, intent);
         Toast.makeText(context, todo, Toast.LENGTH_SHORT).show();
 
     }
 
-    void setNotificatin(Context context) {
+    void setNotificatin(Context context,Intent intent) {
+
+        String DB_todo = intent.getStringExtra("Alart_Context");
+//        Log.d("DB_todo", DB_todo);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context);
 
         mBuilder.setSmallIcon(R.drawable.icon_2)
-                .setContentTitle(Notifier.this.todo)
-                .setContentText(Notifier.this.todo + "の時間です");
+                .setContentTitle(DB_todo)
+                .setContentText(DB_todo + "の時間です");
 
         NotificationManagerCompat mManager = NotificationManagerCompat.from(context);
         mManager.notify(1, mBuilder.build());
