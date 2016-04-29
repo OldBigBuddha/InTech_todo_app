@@ -192,7 +192,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
         intent.putExtra("Alart_Context", POSITION_DB.todo);
-        startActivity(intent);
+
+        setCalendar();
 
         Calendar alarmCalendar;
         alarmCalendar = MainActivity.this.mCaledar;
@@ -201,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         alarmCalendar.set(Calendar.MONTH, month);
         alarmCalendar.set(Calendar.DAY_OF_MONTH, day);
         alarmCalendar.set(Calendar.HOUR_OF_DAY, hour);
-        alarmCalendar.set(Calendar.MINUTE, minute);
+        alarmCalendar.set(Calendar.MINUTE, minute + 2);
         alarmCalendar.set(Calendar.SECOND, 0);
 
         long calendar_long = alarmCalendar.getTimeInMillis();
@@ -253,5 +254,14 @@ public class MainActivity extends AppCompatActivity {
 
         timePickerDialog.show();
 
+    }
+
+    public void setCalendar() {
+        mCaledar = Calendar.getInstance();
+        year  = mCaledar.get(Calendar.YEAR);
+        month = mCaledar.get(Calendar.MONTH);
+        day = mCaledar.get(Calendar.DAY_OF_MONTH);
+        hour = mCaledar.get(Calendar.HOUR_OF_DAY);
+        minute = mCaledar.get(Calendar.MINUTE);
     }
 }
