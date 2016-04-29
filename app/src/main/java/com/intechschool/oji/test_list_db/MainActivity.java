@@ -192,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, Notifier.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
         intent.putExtra("Alart_Context", POSITION_DB.todo);
+        startActivity(intent);
 
         Calendar alarmCalendar;
         alarmCalendar = MainActivity.this.mCaledar;

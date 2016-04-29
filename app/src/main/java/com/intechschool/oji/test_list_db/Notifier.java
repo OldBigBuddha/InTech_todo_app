@@ -23,13 +23,14 @@ public class Notifier extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
 
-        setNotificatin(context, intent);
+        setNotificatin(context);
         Toast.makeText(context, todo, Toast.LENGTH_SHORT).show();
 
     }
 
-    void setNotificatin(Context context,Intent intent) {
+    void setNotificatin(Context context) {
 
+        Intent intent = Intent.getIntent();
         String DB_todo = intent.getStringExtra("Alart_Context");
 //        Log.d("DB_todo", DB_todo);
 
